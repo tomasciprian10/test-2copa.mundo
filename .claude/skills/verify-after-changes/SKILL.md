@@ -33,7 +33,8 @@ observable behavior can skip it.
 
 Before testing, re-read what "done" means:
 
-- The **plan** that was implemented.
+- The **plan** that was implemented, en `docs/plans/YYYY-MM-DD-title.md` —
+  especialmente la lista de tareas y su criterio de hecho.
 - The **design spec** (`docs/specs/YYYY-MM-DD-title.md`) if one exists —
   especially section 5 (Comportamiento esperado) and section 6 (Posibles
   errores y mitigaciones).
