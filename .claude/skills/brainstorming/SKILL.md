@@ -1,70 +1,122 @@
 ---
 name: brainstorming
 description: >-
-  Usar SIEMPRE al comenzar un nuevo desarrollo, feature o cambio no trivial,
-  ANTES de escribir código. Hace preguntas al usuario para eliminar
-  ambigüedades sobre alcance, requisitos y restricciones, y al final presenta
-  2 o 3 alternativas de enfoque para empezar a trabajar. Se activa con frases
-  como "quiero desarrollar", "empecemos una nueva feature", "vamos a construir",
-  "nuevo desarrollo", "implementar algo nuevo".
+  Use ALWAYS when starting a new development, feature, or non-trivial change,
+  BEFORE writing any code. It asks the user clarifying questions to remove
+  ambiguity about scope, requirements, and constraints, and ends by presenting
+  2 or 3 approach alternatives to start working. Triggers on phrases like
+  "I want to build", "let's start a new feature", "new development",
+  "implement something new", "quiero desarrollar", "empecemos una feature",
+  "nuevo desarrollo".
 ---
 
 # Brainstorming
 
-Este skill estructura el arranque de cualquier desarrollo nuevo. Su objetivo es
-**evitar ambigüedades antes de escribir una sola línea de código** y cerrar con
-**2 o 3 alternativas concretas** de por dónde empezar.
+This skill structures the kickoff of any new development. Its goal is to
+**remove ambiguity before writing a single line of code** and to close with
+**2 or 3 concrete alternatives** for where to start.
 
-## Cuándo usarlo
+> **Language:** Mirror the user's language in every interaction. If they write
+> in Spanish, respond in Spanish; if in English, respond in English. Keep the
+> tone direct and collaborative.
 
-Al comenzar un nuevo desarrollo: una feature nueva, un módulo nuevo, un cambio
-de arquitectura o cualquier tarea cuyo alcance no esté totalmente claro. Si la
-tarea es un fix trivial o una edición puntual ya especificada, **no** hace falta
-este skill.
+## When to use it
 
-## Cómo funciona
+At the start of a new development: a new feature, a new module, an architecture
+change, or any task whose scope isn't fully clear. If the task is a trivial fix
+or a well-specified one-line edit, **skip** this skill.
 
-### 1. Entender el contexto (silencioso)
+## How it works
 
-Antes de preguntar, revisá el estado actual: qué hay en el repo, qué patrones y
-convenciones existen, y qué de lo pedido ya está resuelto. No preguntes cosas
-que puedas averiguar leyendo el código.
+### 1. Understand the context (silently)
 
-### 2. Preguntar para eliminar ambigüedades
+Before asking anything, review the current state: what's in the repo, what
+patterns and conventions already exist, and what part of the request is already
+solved. **Never ask what you can find out by reading the code.**
 
-Hacé preguntas hasta que el problema quede sin zonas grises. Priorizá lo que
-más cambia la solución. Cubrí, según aplique:
+### 2. Ask questions to remove ambiguity
 
-- **Objetivo y usuario**: ¿qué problema resuelve y para quién?
-- **Alcance**: ¿qué entra y qué queda explícitamente afuera de esta iteración?
-- **Entradas/salidas**: datos, formatos, casos borde esperados.
-- **Restricciones**: tecnología, dependencias permitidas, rendimiento, plazos.
-- **Criterio de éxito**: ¿cómo sabemos que está terminado y bien hecho?
-- **Integración**: cómo convive con lo que ya existe en el proyecto.
+Ask as many questions as needed — **there is no fixed limit**. Keep asking until
+the problem has no gray areas, but prioritize what most changes the solution and
+group related questions together. Cover, as applicable:
 
-Usá la herramienta `AskUserQuestion` para las decisiones donde la respuesta
-cambia lo que vas a hacer y no tenés un default obvio. Agrupá las preguntas;
-no interrogues de a una si podés resolver varias juntas. Si un punto tiene una
-respuesta razonable por defecto, asumila y decilo, en vez de preguntar.
+- **Goal & user**: what problem does it solve and for whom?
+- **Scope**: what's in and what's explicitly out for this iteration?
+- **Inputs/outputs**: data, formats, expected edge cases.
+- **Constraints**: technology, allowed dependencies, performance, deadlines.
+- **Success criteria**: how do we know it's done and done well?
+- **Integration**: how it coexists with what already exists in the project.
 
-### 3. Presentar 2 o 3 alternativas
+Use the `AskUserQuestion` tool for decisions where the answer changes what you
+will do and there's no obvious default. Don't interrogate one question at a
+time if you can resolve several at once. If a point has a reasonable default,
+assume it and say so instead of asking.
 
-Cuando el problema esté claro, **no empieces a codear todavía**. Presentá
-2 o 3 caminos posibles para arrancar. Para cada alternativa incluí:
+### 3. Present 2 or 3 alternatives
 
-- **Nombre / resumen** en una línea.
-- **En qué consiste**: el enfoque en pocas frases.
-- **Pros y contras**: trade-offs honestos (esfuerzo, riesgo, mantenibilidad,
-  extensibilidad).
-- **Cuándo conviene**: en qué escenario es la mejor opción.
+Once the problem is clear, **don't start coding yet**. Present 2 or 3 possible
+paths to begin. Use the template below for each.
 
-Marcá tu recomendación y por qué. Cerrá pidiendo al usuario que elija (o que
-ajuste) antes de implementar.
+## Alternatives template
 
-## Salida esperada
+```
+## Problem (no ambiguity)
+<one short paragraph restating what you understood>
 
-1. Un breve resumen del problema ya sin ambigüedades (lo que entendiste).
-2. Las 2–3 alternativas comparadas.
-3. Una recomendación y la pregunta de cierre para decidir el camino.
+## Alternatives
 
-No avances a la implementación hasta que el usuario confirme la alternativa.
+### Option A — <one-line name>
+- **What it is:** <the approach in a few sentences>
+- **Pros:** <effort, risk, maintainability, extensibility>
+- **Cons:** <trade-offs>
+- **Best when:** <the scenario where this wins>
+
+### Option B — <one-line name>
+- **What it is:** ...
+- **Pros:** ...
+- **Cons:** ...
+- **Best when:** ...
+
+### Option C — <one-line name>   (optional)
+...
+
+## Recommendation
+<which one and why — 1-2 sentences>
+
+## Next step
+Which path do you want (or how would you adjust it) before I implement?
+```
+
+## Worked example
+
+> **User:** "Quiero agregar un buscador al sitio."
+
+**1. Context:** static site with `index.html`, `css/`, `js/`, no backend.
+
+**2. Questions (via `AskUserQuestion`):**
+- ¿Qué buscás: contenido de la página, un listado de productos, otra cosa?
+- ¿Los datos están en el HTML actual o vienen de un archivo/API?
+- ¿Necesitás que funcione sin conexión / sin servidor?
+- ¿Búsqueda instantánea mientras se escribe, o al apretar Enter?
+
+**3. Alternatives (after answers):**
+
+- **Option A — Client-side filter over the DOM.** Pros: zero dependencies,
+  instant, no backend. Cons: doesn't scale past a few hundred items.
+  Best when: the searchable content is already on the page.
+- **Option B — Prebuilt JSON index + fuzzy search (e.g. a small JS lib).**
+  Pros: fast, fuzzy matching, still static. Cons: extra dependency and a build
+  step to generate the index. Best when: many items or you want typo tolerance.
+- **Option C — Search backed by an API.** Pros: scales, server-side ranking.
+  Cons: needs a backend — big jump for a static site. Best when: data grows or
+  lives elsewhere.
+
+**Recommendation:** Option A to start, migrating to B if the dataset grows.
+
+## Expected output
+
+1. A short, ambiguity-free restatement of the problem.
+2. The 2–3 compared alternatives.
+3. A recommendation and the closing question to pick the path.
+
+**Do not proceed to implementation until the user confirms an alternative.**
