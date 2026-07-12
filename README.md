@@ -27,13 +27,33 @@ servirla con GitHub Pages o cualquier hosting estático.
 Los partidos vienen del archivo `worldcup_1.json` (fuente: openfootball), embebido en
 `js/data.js`. Las banderas se cargan desde flagcdn.
 
+## Base de datos y usuarios (Supabase)
+
+La app puede correr de dos formas:
+
+- **Local (por defecto):** si no configurás Supabase, todo se guarda en el navegador
+  (`localStorage`), como siempre. No hay login.
+- **En la nube (Supabase):** con login por email + contraseña, pools compartidos entre
+  amigos y resultados de partidos globales, sincronizados en vivo entre todos.
+
+Para activar el modo nube ver la guía **[SUPABASE.md](SUPABASE.md)**. En resumen:
+
+1. Aplicá el esquema `supabase/migrations/0001_init.sql` en tu proyecto.
+2. Pegá `url` y `anonKey` de tu proyecto en `js/config.js`.
+
+La primera vez que entres con tu cuenta, la app te ofrece **subir los datos que ya
+tengas en el navegador** a la nube.
+
 ## Estructura
 
 | Archivo | Rol |
 |---|---|
 | `js/data.js` | Datos del torneo (embebidos) |
 | `js/flags.js` | Mapa país → bandera |
-| `js/store.js` | Persistencia en `localStorage` |
+| `js/config.js` | Credenciales de Supabase (vacío = modo local) |
+| `js/supabase.js` | Crea el cliente de Supabase |
+| `js/store.js` | Persistencia: caché en memoria sobre Supabase o `localStorage` |
+| `js/auth.js` | Login/registro y arranque de la app |
 | `js/model.js` | Normalización, árbol del bracket, ganadores, tablas, puntaje |
 | `js/bracket.js` | Render SVG del bracket radial |
 | `js/views.js` | Vistas 1 y 2 |

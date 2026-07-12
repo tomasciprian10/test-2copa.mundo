@@ -13,6 +13,9 @@
   }
 
   function router() {
+    // No renderizar vistas si Supabase está configurado y todavía no hay sesión
+    // (en ese caso #app muestra la pantalla de login).
+    if (window.Auth && !window.Auth.canRender()) return;
     var root = document.getElementById("app");
     var hash = location.hash.replace(/^#\/?/, "");
     var parts = hash.split("/").filter(Boolean);
@@ -30,9 +33,11 @@
     }
   }
 
+  // Exponer el render para que Auth (y el sync en tiempo real) puedan redibujar.
+  window.WCApp = { render: router };
+
   window.addEventListener("hashchange", router);
   window.addEventListener("DOMContentLoaded", function () {
-    if (!location.hash) location.hash = "#/";
-    router();
+    window.Auth.start();
   });
 })();
