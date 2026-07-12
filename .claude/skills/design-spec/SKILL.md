@@ -4,7 +4,9 @@ description: >-
   Use AFTER the problem and desired outcome are clear (e.g. after the
   brainstorming skill), BEFORE implementing. It designs a specification
   document from the USER's point of view and writes it to
-  docs/specs/YYYY-MM-DD-title.md with a fixed set of sections. Triggers on
+  docs/specs/YYYY-MM-DD-title.md with a fixed set of sections. Ends with an
+  approval gate: the user iterates the spec or approves it to continue with
+  the design-plan skill. Triggers on
   phrases like "write the spec", "design the specification", "let's spec this
   out", "necesito una especificación", "escribamos el spec",
   "documento de especificación".
@@ -89,8 +91,27 @@ y cómo se mitiga o comunica cada caso al usuario.
 
 - Confirmá la ruta del archivo creado.
 - Mostrá un resumen corto de lo escrito.
-- Recordá que es un **Draft**: pedí revisión del usuario antes de pasar a
-  implementar.
+- Marcá el documento como **Draft** hasta pasar el approval gate (abajo).
+
+### 5. Approval gate
+
+El spec **no avanza solo**. Después de entregar el Draft, hacé una pausa
+explícita para que el usuario **itere o apruebe**. Usá `AskUserQuestion` con
+dos opciones claras:
+
+- **Iterar el spec** → recogé el feedback, aplicá los cambios sobre el mismo
+  archivo `docs/specs/YYYY-MM-DD-title.md` y **volvé a presentar el gate**.
+  Repetí hasta que el usuario apruebe.
+- **Aprobar y continuar** → cambiá el estado del documento de `Draft` a
+  `Approved`, confirmá la aprobación y pasá al skill **`design-plan`** para
+  generar el plan de implementación a partir de este spec.
+
+Reglas del gate:
+- **No implementes ni generes el plan sin aprobación explícita.** Un silencio
+  o un "ok" ambiguo no es aprobación; confirmá.
+- Mientras el spec esté en `Draft`, no arranques `design-plan`.
+- Solo tras la aprobación cambiá el estado a `Approved` y encadená a
+  `design-plan`.
 
 ## Guidelines
 
